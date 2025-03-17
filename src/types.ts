@@ -114,7 +114,5 @@ export type MenuOption =
   | "Text"
   | "Image"
   | "Export"
-  | "Animation"
-  | "Effect"
   | "Fill"
   | "SVG";

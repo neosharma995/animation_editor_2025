@@ -115,11 +115,11 @@ export class Store {
 
   cutElement() {
     if (!this.selectedElement) {
-      console.warn('⚠️ No layer selected to cut.')
+      console.warn(' No layer selected to cut.')
       return
     }
     if (this.copiedElement) {
-      console.warn('⚠️ Clipboard not empty—overwriting with new cut.')
+      console.warn(' Clipboard not empty—overwriting with new cut.')
     }
     this.copiedElement = this.selectedElement
     if (this.selectedElement.fabricObject) {
@@ -128,23 +128,23 @@ export class Store {
     }
     this.removeEditorElement(this.selectedElement.id)
     this.selectedElement = null
-    console.log('✂️ CUT element with ID:', this.copiedElement.id)
+    console.log(' CUT element with ID:', this.copiedElement.id)
   }
 
   copyElement() {
     if (!this.selectedElement) {
-      console.warn('⚠️ No layer selected for copying.')
+      console.warn(' No layer selected for copying.')
       return
     }
 
     if (this.copiedElement) {
-      console.warn('⚠️ Already copied a layer. Paste before copying again.')
+      console.warn(' Already copied a layer. Paste before copying again.')
       return
     }
 
     this.selectedElement.fabricObject?.clone((cloned: fabric.Object) => {
       if (!cloned) {
-        console.error('🚨 Failed to clone fabric object!')
+        console.error('Failed to clone fabric object!')
         return
       }
 
@@ -162,13 +162,13 @@ export class Store {
         fabricObject: cloned,
       } as EditorElement
 
-      console.log('✅ Copied Layer:', this.copiedElement.name)
+      console.log('Copied Layer:', this.copiedElement.name)
     })
   }
 
   pasteElement() {
     if (!this.copiedElement) {
-      console.warn('⚠️ No copied layer! Copy one first.');
+      console.warn(' No copied layer! Copy one first.');
       return;
     }
 
@@ -178,7 +178,7 @@ export class Store {
     if (elementToPaste) {
       elementToPaste.fabricObject?.clone((cloned: fabric.Object) => {
         if (!cloned) {
-          console.error('❌ Failed to clone Fabric.js object.');
+          console.error('Failed to clone Fabric.js object.');
           return;
         }
         let newProperties = { ...elementToPaste.properties };
@@ -229,10 +229,10 @@ export class Store {
         this.canvas?.add(cloned);
         this.canvas?.renderAll();
 
-        console.log('✅ Pasted Full Layer:', newElement.name);
+        console.log('Pasted Full Layer:', newElement.name);
       });
     } else {
-      console.warn('⚠️ Frame too small to paste!');
+      console.warn('Frame too small to paste!');
     }
   }
 
@@ -240,7 +240,7 @@ export class Store {
 
   deleteElement() {
     if (!this.selectedElement) {
-      console.warn('⚠️ No layer selected to delete.')
+      console.warn('No layer selected to delete.')
       return
     }
     const elementToDelete = this.selectedElement
@@ -256,7 +256,7 @@ export class Store {
 
   splitElement() {
     if (!this.selectedElement) {
-      console.warn('⚠️ Cannot split audio layers.')
+      console.warn('Cannot split audio layers.')
       return
     }
     const selectedElement = this.selectedElement
@@ -264,14 +264,14 @@ export class Store {
     const totalDuration = end - start
 
     if (totalDuration < 2000) {
-      console.warn('⚠️ Frame too small to split!')
+      console.warn('Frame too small to split!')
       return
     }
     const midTime = Math.floor((start + end) / 2)
     this.updateEditorElementTimeFrame(selectedElement, { end: midTime })
     selectedElement.fabricObject?.clone((cloned: fabric.Object) => {
       if (!cloned) {
-        console.error('❌ Failed to clone Fabric.js object.')
+        console.error('Failed to clone Fabric.js object.')
         return
       }
       let newProperties = { ...selectedElement.properties }
@@ -1104,7 +1104,7 @@ export class Store {
           serializer.serializeToString(svgRoot),
           (objects) => {
             if (!objects || objects.length === 0) {
-              console.error('🚨 Failed to load SVG objects')
+              console.error(' Failed to load SVG objects')
               return
             }
             const objectMap = new Map<string, fabric.Object>()
@@ -1212,18 +1212,18 @@ export class Store {
             this.canvas?.renderAll()
 
             console.log(
-              '✅ SVG Added to Canvas. Canvas Objects:',
+              'SVG Added to Canvas. Canvas Objects:',
               this.canvas?.getObjects()
             )
             const addedSvg = fullSvgGroup.toSVG()
-            console.log('🖼️ Full SVG Group as SVG:\n', addedSvg)
+            console.log('Full SVG Group as SVG:\n', addedSvg)
             console.log(
               'Available SVG Parts for Animation:',
               allParts.map((p) => p.id)
             )
             const allNestedObjects = this.getAllObjectsRecursively(fullSvgGroup)
             console.log(
-              '🔎 All nested objects (including sub-groups and paths):',
+              ' All nested objects (including sub-groups and paths):',
               allNestedObjects
             )
 
@@ -1257,7 +1257,7 @@ export class Store {
           }
         )
       })
-      .catch((error) => console.error('⚠️ Error fetching SVG:', error))
+      .catch((error) => console.error(' Error fetching SVG:', error))
   }
 
   getAllObjectsRecursively(obj: fabric.Object): fabric.Object[] {

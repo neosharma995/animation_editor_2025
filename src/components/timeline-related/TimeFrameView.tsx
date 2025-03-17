@@ -33,7 +33,7 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
             if (store.selectedElement) {
               store.cutElement();
             } else {
-              console.warn("⚠️ No layer selected to cut.");
+              console.warn("No layer selected to cut.");
             }
             return;
           case "c":
@@ -41,7 +41,7 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
             if (store.selectedElement) {
               store.copyElement();
             } else {
-              console.warn("⚠️ No layer selected to copy.");
+              console.warn("No layer selected to copy.");
             }
             return;
           case "v":
@@ -53,7 +53,7 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
             if (store.selectedElement) {
               store.splitElement();
             } else {
-              console.warn("⚠️ No layer selected to split.");
+              console.warn("No layer selected to split.");
             }
             return;
           default:
@@ -65,7 +65,7 @@ export const TimeFrameView = observer((props: { element: EditorElement }) => {
           if (store.selectedElement) {
             store.deleteElement();
           } else {
-            console.warn("⚠️ No layer selected to delete.");
+            console.warn("No layer selected to delete.");
           }
         }
       }
